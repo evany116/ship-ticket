@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>前进号・周年限定登舰证</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;font-family:'PingFang SC','Microsoft YaHei',sans-serif;overflow:hidden;background:#0a0e27;color:#fff;user-select:none}
+
+/* ====== Scroll View ====== */
+.scroll-view{position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden}
+.scene{position:absolute;top:0;left:0;width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.scene.active{display:flex;z-index:10}
+.scene.fade-in{animation:fadeIn .6s ease forwards}
+.scene.fade-out{animation:fadeOut .5s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes fadeOut{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(1.04)}}
+
+/* ====== Scene 1: Seaside ====== */
+#scene-seaside{background:linear-gradient(180deg,#87CEEB 0%,#B0E0E6 30%,#4A90D9 55%,#1a3a5c 75%,#0a1628 100%);justify-content:flex-end;padding-bottom:15vh}
+.seaside-sun{position:absolute;top:5%;right:8%;width:60px;height:60px;background:radial-gradient(circle,#FFD700,#FFA500);border-radius:50%;box-shadow:0 0 60px rgba(255,215,0,.6),0 0 120px rgba(255,165,0,.3);animation:sunPulse 3s ease-in-out infinite}
+@keyframes sunPulse{0%,100%{transform:scale(1);box-shadow:0 0 60px rgba(255,215,0,.6)}50%{transform:scale(1.05);box-shadow:0 0 80px rgba(255,215,0,.8)}}
+.cloud{position:absolute;color:rgba(255,255,255,.7);font-size:40px;animation:cloudDrift 20s linear infinite}
+.cloud:nth-child(1){top:8%;left:-50px;animation-duration:25s;font-size:50px}
+.cloud:nth-child(2){top:15%;left:-100px;animation-duration:30s;font-size:35px;animation-delay:-10s}
+@keyframes cloudDrift{from{transform:translateX(-100px)}to{transform:translateX(calc(100vw + 100px))}}
+.seaside-ship{font-size:80px;animation:shipBob 3s ease-in-out infinite;margin-bottom:20px;filter:drop-shadow(0 10px 30px rgba(0,0,0,.3))}
+@keyframes shipBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.seaside-title{font-size:32px;font-weight:700;text-shadow:0 2px 20px rgba(0,0,0,.5);margin-bottom:12px;letter-spacing:4px}
+.seaside-title span{display:inline-block;animation:titleWave 2s ease-in-out infinite}
+.seaside-title span:nth-child(1){animation-delay:0s}
+.seaside-title span:nth-child(2){animation-delay:.1s}
+.seaside-title span:nth-child(3){animation-delay:.2s}
+.seaside-title span:nth-child(4){animation-delay:.3s}
+.seaside-title span:nth-child(5){animation-delay:.4s}
+.seaside-title span:nth-child(6){animation-delay:.5s}
+@keyframes titleWave{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.seaside-sub{font-size:14px;opacity:.8;margin-bottom:30px;letter-spacing:2px}
+.seaside-btn{width:160px;height:48px;border-radius:24px;border:2px solid rgba(255,255,255,.8);background:rgba(255,255,255,.15);backdrop-filter:blur(10px);color:#fff;font-size:16px;letter-spacing:4px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.seaside-btn::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,.2),transparent);transform:rotate(45deg) translateX(-100%);transition:.6s}
+.seaside-btn:active::after{transform:rotate(45deg) translateX(100%)}
+.seaside-btn:active{transform:scale(.95)}
+.waves-container{position:absolute;bottom:0;left:0;width:100%;height:80px;overflow:hidden}
+.wave{position:absolute;bottom:0;width:200%;height:100%;background:repeat-x;animation:waveMove 4s linear infinite}
+.wave1{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,120 300,0 450,60 C600,120 750,0 900,60 C1050,120 1200,0 1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,.15)'/%3E%3C/svg%3E") repeat-x;animation-duration:4s;height:60px}
+.wave2{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,120 300,0 450,60 C600,120 750,0 900,60 C1050,120 1200,0 1200,60 L1200,120 L0,120 Z' fill='rgba(255,255,255,.1)'/%3E%3C/svg%3E") repeat-x;animation-duration:6s;animation-direction:reverse;height:40px;bottom:-10px}
+.wave3{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,60 C150,120 300,0 450,60 C600,120 750,0 900,60 C1050,120 1200,0 1200,60 L1200,120 L0,120 Z' fill='rgba(135,206,235,.2)'/%3E%3C/svg%3E") repeat-x;animation-duration:3s;height:30px;bottom:-15px}
+@keyframes waveMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.seagull{position:absolute;color:#fff;font-size:20px;animation:gullFly 12s linear infinite;top:10%}
+.seagull:nth-child(1){left:-30px;font-size:18px;animation-duration:15s;top:12%}
+.seagull:nth-child(2){left:-60px;font-size:24px;animation-duration:18s;top:8%;animation-delay:-6s}
+@keyframes gullFly{from{transform:translateX(-60px)}to{transform:translateX(calc(100vw + 60px))}}
+
+/* ====== Scene 2: Confetti Burst ====== */
+#scene-burst{background:linear-gradient(135deg,#0a0e27,#1a1a4e,#0a0e27);z-index:20}
+#confetti-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.burst-text{font-size:42px;font-weight:700;text-align:center;line-height:1.4;opacity:0;transform:scale(.5)}
+.burst-text.show{opacity:1;transform:scale(1);transition:all .8s cubic-bezier(.34,1.56,.64,1)}
+.burst-text .big{display:block;font-size:52px;background:linear-gradient(135deg,#FFD700,#FFA500,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:goldShimmer 2s ease-in-out infinite}
+.burst-text .sub{display:block;font-size:20px;margin-top:12px;background:linear-gradient(135deg,#FFE4B5,#FFF8DC);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes goldShimmer{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+
+/* ====== Scene 3: Splash Page ====== */
+#scene-splash{background:linear-gradient(160deg,#0a0e27 0%,#1a1040 30%,#0d1b3e 60%,#0a0e27 100%);justify-content:center;padding:0 24px}
+.splash-badge{position:relative;margin-bottom:20px}
+.splash-badge-glow{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:300px;height:200px;background:radial-gradient(ellipse,rgba(255,215,0,.15),transparent 70%);pointer-events:none}
+.splash-title{font-size:28px;font-weight:800;text-align:center;line-height:1.4;margin-bottom:24px;position:relative;z-index:1}
+.splash-title .gold{background:linear-gradient(135deg,#BF953F,#FCF6B5,#B38728,#FBF5B7,#AA771C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:goldShimmer 3s ease-in-out infinite;font-size:30px;letter-spacing:2px}
+.splash-title .subtitle{font-size:16px;color:rgba(255,255,255,.6);display:block;margin-top:8px;letter-spacing:6px;font-weight:400;-webkit-text-fill-color:rgba(255,255,255,.6)}
+.splash-letter{background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,215,0,.04));border:1px solid rgba(255,215,0,.15);border-radius:16px;padding:24px 20px;max-width:340px;width:100%;margin-bottom:30px;position:relative;backdrop-filter:blur(5px)}
+.splash-letter::before{content:'✧';position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:20px;color:#FFD700}
+.splash-letter-text{font-size:14px;line-height:1.8;color:rgba(255,255,255,.85);letter-spacing:1px;text-align:center}
+.splash-letter-text .highlight{color:#FFD700}
+.splash-stamp{position:absolute;bottom:-15px;right:20px;width:50px;height:50px;border:2px solid rgba(255,215,0,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:rgba(255,215,0,.5);transform:rotate(-15deg);font-style:italic}
+.splash-sparkles{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;overflow:hidden}
+.splash-sparkle{position:absolute;width:4px;height:4px;background:#FFD700;border-radius:50%;animation:sparkleFloat 3s ease-in-out infinite}
+.splash-sparkle:nth-child(1){top:10%;left:20%;animation-delay:0s}
+.splash-sparkle:nth-child(2){top:30%;left:80%;animation-delay:.5s}
+.splash-sparkle:nth-child(3){top:60%;left:15%;animation-delay:1s}
+.splash-sparkle:nth-child(4){top:80%;left:75%;animation-delay:1.5s}
+.splash-sparkle:nth-child(5){top:20%;left:50%;animation-delay:2s}
+.splash-sparkle:nth-child(6){top:70%;left:40%;animation-delay:2.5s}
+@keyframes sparkleFloat{0%,100%{opacity:0;transform:scale(0) translateY(0)}50%{opacity:1;transform:scale(1) translateY(-20px)}}
+.splash-bottom{position:absolute;bottom:0;left:0;width:100%;padding:16px 24px 30px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.splash-btn{width:90%;max-width:340px;height:50px;border:none;border-radius:25px;background:linear-gradient(135deg,#BF953F,#FCF6B5,#B38728,#FBF5B7,#AA771C);background-size:300% 300%;animation:goldShimmer 3s ease-in-out infinite;color:#1a1040;font-size:18px;font-weight:700;letter-spacing:6px;cursor:pointer;transition:transform .2s;box-shadow:0 4px 30px rgba(255,215,0,.3)}
+.splash-btn:active{transform:scale(.96)}
+.splash-tnc{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:1px;text-align:center}
+
+/* ====== Scene 4: Form ====== */
+#scene-form{background:linear-gradient(160deg,#0a0e27,#1a1040,#0d1b3e,#0a0e27);justify-content:flex-start;padding-top:0}
+.form-header{width:100%;padding:12px 20px 10px;text-align:center;background:linear-gradient(180deg,rgba(10,14,39,.95),rgba(10,14,39,.8));backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,215,0,.1);flex-shrink:0}
+.form-header-title{font-size:13px;color:rgba(255,215,0,.6);letter-spacing:4px}
+.form-header-sub{font-size:18px;font-weight:700;background:linear-gradient(135deg,#BF953F,#FCF6B5,#B38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:2px;letter-spacing:8px}
+.form-scroll{flex:1;overflow-y:auto;width:100%;-webkit-overflow-scrolling:touch;padding:20px 24px 100px}
+.form-group{margin-bottom:24px}
+.form-label{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:8px;display:block;letter-spacing:1px}
+.form-label .required{color:#FF6B6B;margin-left:2px}
+.form-input{width:100%;height:46px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:0 16px;color:#fff;font-size:16px;outline:none;transition:border .3s}
+.form-input:focus{border-color:rgba(255,215,0,.5)}
+.form-input::placeholder{color:rgba(255,255,255,.25)}
+.form-hint{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px}
+.form-camps{display:flex;gap:10px}
+.camp-option{flex:1;padding:14px 8px;border-radius:14px;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.08);text-align:center;cursor:pointer;transition:all .3s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.camp-option .camp-emoji{font-size:28px}
+.camp-option .camp-name{font-size:14px;color:rgba(255,255,255,.6);letter-spacing:1px}
+.camp-option:active{transform:scale(.95)}
+.camp-option.selected-sea{border-color:#4A90D9;background:rgba(74,144,217,.12);box-shadow:0 0 20px rgba(74,144,217,.3);transform:translateY(-2px)}
+.camp-option.selected-sea .camp-name{color:#4A90D9}
+.camp-option.selected-land{border-color:#4CAF50;background:rgba(76,175,80,.12);box-shadow:0 0 20px rgba(76,175,80,.3);transform:translateY(-2px)}
+.camp-option.selected-land .camp-name{color:#4CAF50}
+.camp-option.selected-air{border-color:#FFC107;background:rgba(255,193,7,.12);box-shadow:0 0 20px rgba(255,193,7,.3);transform:translateY(-2px)}
+.camp-option.selected-air .camp-name{color:#FFC107}
+.form-bottom{position:absolute;bottom:0;left:0;width:100%;padding:12px 24px 30px;background:linear-gradient(0deg,rgba(10,14,39,.95),rgba(10,14,39,.8));backdrop-filter:blur(10px);flex-shrink:0}
+.form-btn{width:100%;max-width:340px;height:50px;margin:0 auto;display:block;border:none;border-radius:25px;background:linear-gradient(135deg,#BF953F,#FCF6B5,#B38728,#FBF5B7,#AA771C);background-size:300% 300%;animation:goldShimmer 3s ease-in-out infinite;color:#1a1040;font-size:17px;font-weight:700;letter-spacing:6px;cursor:pointer;transition:transform .2s;box-shadow:0 4px 30px rgba(255,215,0,.3)}
+.form-btn:active{transform:scale(.96)}
+.form-btn:disabled{opacity:.4;transform:none}
+
+/* ====== Scene 5: Ticket ====== */
+#scene-ticket{background:linear-gradient(160deg,#0a0e27,#0d1b3e,#1a1040,#0a0e27);justify-content:center;padding:0 16px}
+.ticket-wrapper{perspective:1200px;width:100%;max-width:340px;aspect-ratio:3/4;cursor:pointer}
+.ticket-card{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d}
+.ticket-card.flipped{transform:rotateY(180deg)}
+.ticket-face{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;display:flex;flex-direction:column;padding:18px}
+.ticket-front{background:linear-gradient(160deg,#0d1b3e,#1a1040,#0d1b3e);border:1.5px solid rgba(255,215,0,.3);box-shadow:0 0 40px rgba(255,215,0,.08),inset 0 0 60px rgba(255,215,0,.03);z-index:2}
+.ticket-back{background:linear-gradient(160deg,#0a0e27,#14143a,#0a0e27);border:1.5px solid rgba(74,144,217,.3);box-shadow:0 0 40px rgba(74,144,217,.08);transform:rotateY(180deg);padding:20px}
+.ticket-shimmer{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,215,0,.08),transparent);transform:skewX(-25deg);animation:shimmerSweep 4s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes shimmerSweep{0%,100%{left:-100%}50%{left:200%}}
+.ticket-front-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;position:relative;z-index:2}
+.ticket-front-top .left{font-size:10px;color:rgba(255,215,0,.5);letter-spacing:1px}
+.ticket-front-top .right{font-size:11px;color:rgba(255,215,0,.6);letter-spacing:1px;font-weight:600}
+.ticket-title{text-align:center;margin-bottom:4px;position:relative;z-index:2}
+.ticket-title-main{font-size:36px;font-weight:900;background:linear-gradient(135deg,#BF953F,#FCF6B5,#B38728,#FBF5B7,#AA771C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:300% 300%;animation:goldShimmer 3s ease-in-out infinite;letter-spacing:8px;line-height:1.2}
+.ticket-title-en{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:4px;margin-top:-2px}
+.ticket-img-area{text-align:center;margin:4px 0;position:relative;z-index:2}
+.ticket-carrier{font-size:32px;filter:drop-shadow(0 2px 10px rgba(255,215,0,.4))}
+.ticket-avatar-area{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;z-index:2;margin-bottom:6px}
+.ticket-avatar{width:48px;height:48px;border-radius:50%;border:2px solid #FFD700;display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(255,215,0,.08);box-shadow:0 0 15px rgba(255,215,0,.2)}
+.ticket-nickname{font-size:15px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,.9)}
+.ticket-stats{display:flex;flex-direction:column;gap:3px;position:relative;z-index:2;width:100%}
+.ticket-stat{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:2px 8px}
+.ticket-stat-label{color:rgba(255,255,255,.5);letter-spacing:1px}
+.ticket-stat-value{color:#FFD700;font-weight:600;letter-spacing:1px}
+.ticket-stat-bg{background:rgba(255,215,0,.08);border-radius:4px;padding:3px 8px!important}
+.ticket-stat-value-box{background:rgba(255,215,0,.12);border-radius:4px;padding:2px 8px;color:#FFD700;font-weight:700;font-size:11px}
+.ticket-camp-badge{position:absolute;bottom:14px;right:14px;z-index:2;display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600}
+.ticket-camp-badge .camp-text{font-size:11px;color:rgba(255,215,0,.7)}
+/* Back face */
+.ticket-back-title{font-size:22px;font-weight:700;text-align:center;margin-bottom:12px;letter-spacing:4px;color:rgba(255,215,0,.6)}
+.ticket-back-data{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.ticket-back-row{display:flex;justify-content:space-between;padding:6px 10px;background:rgba(255,255,255,.04);border-radius:8px;font-size:13px}
+.ticket-back-row .label{color:rgba(255,255,255,.5)}
+.ticket-back-row .value{color:rgba(255,255,255,.85);font-weight:500}
+.ticket-back-msg{padding:10px 12px;background:rgba(255,215,0,.05);border-radius:10px;border:1px solid rgba(255,215,0,.1);font-size:12px;line-height:1.6;color:rgba(255,255,255,.8);text-align:center;margin-bottom:10px}
+.ticket-back-markers{display:flex;justify-content:center;gap:20px;padding-top:8px;border-top:1px solid rgba(255,255,255,.06)}
+.ticket-back-marker{font-size:11px;display:flex;align-items:center;gap:4px}
+.ticket-back-marker .dot{width:8px;height:8px;border-radius:50%}
+.ticket-back-marker .dot.blue{background:#4A90D9}
+.ticket-back-marker .dot.green{background:#4CAF50}
+.ticket-back-marker .dot.gold{background:#FFD700}
+.ticket-flip-hint{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-size:11px;color:rgba(255,255,255,.3);letter-spacing:2px;white-space:nowrap;animation:pulse 2s ease-in-out infinite}
+
+/* ====== Scene 6: Invitation ====== */
+#scene-invite{background:linear-gradient(160deg,#0a0e27,#0d1b3e,#1a1040,#0a0e27);justify-content:center;gap:20px;padding:0 24px}
+.invite-title{font-size:22px;font-weight:700;background:linear-gradient(135deg,#BF953F,#FCF6B5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:4px}
+.invite-sub{font-size:14px;color:rgba(255,255,255,.5);letter-spacing:2px;margin-top:-10px}
+.invite-actions{display:flex;flex-direction:column;gap:14px;width:100%;max-width:300px}
+.invite-btn{height:52px;border-radius:26px;border:none;font-size:16px;font-weight:600;letter-spacing:4px;cursor:pointer;transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.invite-btn:active{transform:scale(.96)}
+.invite-btn-primary{background:linear-gradient(135deg,#BF953F,#FCF6B5,#B38728);color:#1a1040;box-shadow:0 4px 30px rgba(255,215,0,.3)}
+.invite-btn-secondary{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
+.invite-mini-card{width:200px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,215,0,.15);margin-bottom:5px}
+.invite-mini-card img{width:100%;display:block}
+
+/* utilities */
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.6}}
+.flip-btn{position:absolute;bottom:16px;right:16px;z-index:3;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:6px 14px;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;transition:all .3s}
+.flip-btn:active{background:rgba(255,255,255,.15)}
+</style>
+</head>
+<body>
+<div class="scroll-view" id="app">
+
+<!-- ====== Scene 1: Seaside ====== -->
+<div class="scene active" id="scene-seaside">
+  <div class="seaside-sun"></div>
+  <div class="cloud">☁️</div>
+  <div class="cloud">☁️</div>
+  <div class="seagull">🕊️</div>
+  <div class="seagull">🕊️</div>
+  <div class="seaside-ship">🚢</div>
+  <div class="seaside-title">
+    <span>欢</span><span>迎</span><span>水</span><span>手</span><span>登</span><span>船</span>
+  </div>
+  <div class="seaside-sub">✦ 点击上船，开启征程 ✦</div>
+  <button class="seaside-btn" onclick="goToScene('scene-burst')">点击上船</button>
+  <div class="waves-container">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+</div>
+
+<!-- ====== Scene 2: Confetti Burst ====== -->
+<div class="scene" id="scene-burst">
+  <canvas id="confetti-canvas"></canvas>
+  <div class="burst-text" id="burst-text">
+    <span class="big">🎉 欢迎登舰 🎉</span>
+    <span class="sub">✦ 前进号・扬帆起航 ✦</span>
+  </div>
+</div>
+
+<!-- ====== Scene 3: Splash Page ====== -->
+<div class="scene" id="scene-splash">
+  <div class="splash-sparkles">
+    <div class="splash-sparkle"></div>
+    <div class="splash-sparkle"></div>
+    <div class="splash-sparkle"></div>
+    <div class="splash-sparkle"></div>
+    <div class="splash-sparkle"></div>
+    <div class="splash-sparkle"></div>
+  </div>
+  <div class="splash-badge">
+    <div class="splash-badge-glow"></div>
+    <div class="splash-title">
+      <span class="gold">前进号</span>
+      <span style="font-size:14px;color:rgba(255,255,255,.6);display:block;margin-top:4px;letter-spacing:2px">✦</span>
+      <span class="gold" style="font-size:22px">周年限定登舰证</span>
+      <span class="subtitle">— COMMEMORATIVE —</span>
+    </div>
+  </div>
+  <div class="splash-letter">
+    <div class="splash-letter-text">
+      致各位水手：<br>
+      周年之际，<span class="highlight">前进号</span>再度启航。<br>
+      选择你的阵营，领取专属登舰证，<br>
+      共赴下一程<span class="highlight">山海</span>。
+    </div>
+    <div class="splash-stamp">启</div>
+  </div>
+  <div class="splash-bottom">
+    <button class="splash-btn" onclick="goToScene('scene-form')">开启登舰</button>
+    <div class="splash-tnc">本登舰证为周年专属纪念，每人限领一张</div>
+  </div>
+</div>
+
+<!-- ====== Scene 4: Form ====== -->
+<div class="scene" id="scene-form">
+  <div class="form-header">
+    <div class="form-header-title">「周年限定」</div>
+    <div class="form-header-sub">前进号</div>
+  </div>
+  <div class="form-scroll">
+    <div class="form-group">
+      <label class="form-label">水手昵称 <span class="required">*</span></label>
+      <input class="form-input" id="input-nickname" type="text" maxlength="8" pattern="\d{8}" inputmode="numeric" placeholder="请输入8位精网号">
+      <div class="form-hint">限8位阿拉伯数字（精网号）</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">成为水手的日期 <span class="required">*</span></label>
+      <input class="form-input" id="input-date" type="date" style="color-scheme:dark">
+    </div>
+    <div class="form-group">
+      <label class="form-label">选择你的阵营 <span class="required">*</span></label>
+      <div class="form-camps">
+        <div class="camp-option" data-camp="sea" onclick="selectCamp(this,'sea')">
+          <span class="camp-emoji">🚢</span>
+          <span class="camp-name">海・舰艇</span>
+        </div>
+        <div class="camp-option" data-camp="land" onclick="selectCamp(this,'land')">
+          <span class="camp-emoji">🏔️</span>
+          <span class="camp-name">陆・基地</span>
+        </div>
+        <div class="camp-option" data-camp="air" onclick="selectCamp(this,'air')">
+          <span class="camp-emoji">✈️</span>
+          <span class="camp-name">空・编队</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-bottom">
+    <button class="form-btn" id="form-btn" onclick="generateTicket()">生成登舰证</button>
+  </div>
+</div>
+
+<!-- ====== Scene 5: Ticket ====== -->
+<div class="scene" id="scene-ticket">
+  <div class="ticket-wrapper" id="ticket-wrapper" onclick="flipCard(event)">
+    <div class="ticket-card" id="ticket-card">
+      <!-- Front -->
+      <div class="ticket-face ticket-front" id="ticket-front">
+        <div class="ticket-shimmer"></div>
+        <div class="ticket-front-top">
+          <span class="left">前进号・周年限定</span>
+          <span class="right">「2024-2026」</span>
+        </div>
+        <div class="ticket-title">
+          <div class="ticket-title-main">登舰证</div>
+          <div class="ticket-title-en">BOARDING PASS</div>
+        </div>
+        <div class="ticket-img-area">
+          <span class="ticket-carrier">⚓</span>
+        </div>
+        <div class="ticket-avatar-area">
+          <div class="ticket-avatar" id="ticket-avatar">🐬</div>
+          <div class="ticket-nickname" id="ticket-nickname">——</div>
+        </div>
+        <div class="ticket-stats">
+          <div class="ticket-stat">
+            <span class="ticket-stat-label">航行天数</span>
+            <span class="ticket-stat-value" id="ticket-days">0</span>
+          </div>
+          <div class="ticket-stat">
+            <span class="ticket-stat-label">舱位编号</span>
+            <span class="ticket-stat-value" id="ticket-cabin">C-000</span>
+          </div>
+          <div class="ticket-stat ticket-stat-bg">
+            <span class="ticket-stat-label">船籍编号</span>
+            <span class="ticket-stat-value-box">CNS-2026-7541398</span>
+          </div>
+        </div>
+        <div class="ticket-camp-badge" id="ticket-camp-badge">
+          <span class="camp-text" id="ticket-camp-text">海・舰艇</span>
+        </div>
+        <button class="flip-btn" onclick="event.stopPropagation();flipCard()">↻ 翻转</button>
+      </div>
+      <!-- Back -->
+      <div class="ticket-face ticket-back" id="ticket-back">
+        <div class="ticket-back-title">📜 航海日志</div>
+        <div class="ticket-back-data" id="back-data">
+          <div class="ticket-back-row"><span class="label">昵称</span><span class="value" id="back-nickname">——</span></div>
+          <div class="ticket-back-row"><span class="label">入群日期</span><span class="value" id="back-date">——</span></div>
+          <div class="ticket-back-row"><span class="label">航行天数</span><span class="value" id="back-days">0</span></div>
+          <div class="ticket-back-row"><span class="label">船籍编号</span><span class="value" style="color:#FFD700">CNS-2026-7541398</span></div>
+          <div class="ticket-back-row"><span class="label">阵营</span><span class="value" id="back-camp">——</span></div>
+          <div class="ticket-back-row"><span class="label">舱位</span><span class="value" id="back-cabin">C-000</span></div>
+        </div>
+        <div class="ticket-back-msg" id="back-message">水手 ——，欢迎登舰！<br>你的舱位在 —— 号，这一路，请多关照 ✨</div>
+        <div class="ticket-back-markers">
+          <span class="ticket-back-marker"><span class="dot blue"></span> ⚓ 海蓝</span>
+          <span class="ticket-back-marker"><span class="dot green"></span> ⛰️ 陆绿</span>
+          <span class="ticket-back-marker"><span class="dot gold"></span> ✈️ 空金</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ticket-flip-hint">👆 点击卡片翻转查看背面</div>
+</div>
+
+<!-- ====== Scene 6: Invitation ====== -->
+<div class="scene" id="scene-invite">
+  <div class="invite-title">🎫 登舰证已生成</div>
+  <div class="invite-sub">珍藏你的专属纪念</div>
+  <div class="invite-actions">
+    <button class="invite-btn invite-btn-primary" onclick="saveTicket()">
+      💾 保存图片
+    </button>
+    <button class="invite-btn invite-btn-secondary" onclick="shareTicket()">
+      📤 分享好友
+    </button>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ====== Scene Management ====== */
+let currentScene = 'scene-seaside';
+function goToScene(id, delay = 0) {
+  const currentEl = document.getElementById(currentScene);
+  const nextEl = document.getElementById(id);
+  if (!currentEl || !nextEl) return;
+  currentEl.classList.remove('active','fade-in');
+  currentEl.classList.add('fade-out');
+  setTimeout(() => {
+    currentEl.classList.remove('fade-out');
+    currentEl.style.display = 'none';
+    nextEl.style.display = 'flex';
+    nextEl.classList.add('active','fade-in');
+    currentScene = id;
+    if (id === 'scene-burst') startConfetti();
+    if (id === 'scene-form') setTimeout(() => document.getElementById('input-nickname')?.focus(), 400);
+  }, delay || 400);
+}
+
+/* ====== Confetti ====== */
+let confettiRunning = false;
+function startConfetti() {
+  if (confettiRunning) return;
+  confettiRunning = true;
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+  ctx.scale(2,2);
+  const w = canvas.width/2, h = canvas.height/2;
+  const colors = ['#FFD700','#FFA500','#FF6347','#00BFFF','#32CD32','#FF69B4','#9370DB','#FFD700'];
+  const particles = [];
+  for (let i = 0; i < 120; i++) {
+    particles.push({
+      x: w/2 + (Math.random()-0.5)*w*0.4,
+      y: h/2 + (Math.random()-0.5)*h*0.3,
+      vx: (Math.random()-0.5)*12,
+      vy: (Math.random()-0.5)*12 - 6,
+      size: Math.random()*8 + 4,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      rotation: Math.random()*360,
+      rotSpeed: (Math.random()-0.5)*10,
+      life: 1
+    });
+  }
+  const burstText = document.getElementById('burst-text');
+  setTimeout(() => burstText.classList.add('show'), 100);
+  let start = performance.now();
+  function animate() {
+    const elapsed = (performance.now() - start) / 1000;
+    ctx.clearRect(0,0,w,h);
+    let alive = false;
+    for (const p of particles) {
+      p.life = Math.max(0, 1 - elapsed/3);
+      if (p.life <= 0) continue;
+      alive = true;
+      p.x += p.vx * 0.03;
+      p.vy += 0.15;
+      p.y += p.vy * 0.03;
+      p.rotation += p.rotSpeed;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation * Math.PI / 180);
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
+      ctx.restore();
+    }
+    if (alive) {
+      requestAnimationFrame(animate);
+    } else {
+      confettiRunning = false;
+      setTimeout(() => goToScene('scene-splash'), 600);
+    }
+  }
+  animate();
+}
+
+/* ====== Form Logic ====== */
+let selectedCamp = '';
+const oceanCreatures = ['🐬','🐳','🐋','🦈','🐙','🦑','🦐','🦀','🐡','🐠','🐟','🐚','🪸','🐢'];
+
+function selectCamp(el, camp) {
+  document.querySelectorAll('.camp-option').forEach(c => {
+    c.className = 'camp-option';
+  });
+  el.classList.add('selected-' + camp);
+  selectedCamp = camp;
+}
+
+function generateTicket() {
+  const nickname = document.getElementById('input-nickname').value.trim();
+  const dateStr = document.getElementById('input-date').value;
+  if (!nickname || nickname.length !== 8 || !/^\d{8}$/.test(nickname)) {
+    document.getElementById('input-nickname').focus();
+    document.getElementById('input-nickname').style.borderColor = '#FF6B6B';
+    setTimeout(() => document.getElementById('input-nickname').style.borderColor = '', 1500);
+    return;
+  }
+  if (!dateStr) {
+    document.getElementById('input-date').style.borderColor = '#FF6B6B';
+    setTimeout(() => document.getElementById('input-date').style.borderColor = '', 1500);
+    return;
+  }
+  if (!selectedCamp) return;
+
+  // Calculate sailing days
+  const joinDate = new Date(dateStr);
+  const today = new Date();
+  const diffMs = today - joinDate;
+  const sailingDays = Math.max(1, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+
+  // Generate cabin
+  const campMap = {sea:'A', land:'B', air:'C'};
+  const campLetter = campMap[selectedCamp] || 'C';
+  const cabinNum = String(Math.floor(Math.random() * 900) + 100);
+  const cabin = campLetter + '-' + cabinNum;
+
+  // Random creature
+  const creature = oceanCreatures[Math.floor(Math.random() * oceanCreatures.length)];
+
+  // Camp info
+  const campNames = {sea:'🚢 海・舰艇', land:'🏔️ 陆・基地', air:'✈️ 空・编队'};
+  const campEmojis = {sea:'⚓', land:'⛰️', air:'✈️'};
+  const areaNames = {sea:'A 区', land:'B 区', air:'C 区'};
+
+  // Update front
+  document.getElementById('ticket-avatar').textContent = creature;
+  document.getElementById('ticket-nickname').textContent = nickname;
+  document.getElementById('ticket-days').textContent = sailingDays;
+  document.getElementById('ticket-cabin').textContent = cabin;
+  document.getElementById('ticket-camp-text').textContent = campNames[selectedCamp];
+
+  // Update back
+  document.getElementById('back-nickname').textContent = nickname;
+  document.getElementById('back-date').textContent = dateStr;
+  document.getElementById('back-days').textContent = sailingDays;
+  document.getElementById('back-camp').textContent = campNames[selectedCamp];
+  document.getElementById('back-cabin').textContent = cabin;
+  document.getElementById('back-message').innerHTML =
+    `水手 ${nickname}，欢迎登舰！<br>你的舱位在 ${areaNames[selectedCamp]} ${cabinNum} 号，这一路，请多关照 ✨`;
+
+  // Reset card flip
+  document.getElementById('ticket-card').classList.remove('flipped');
+
+  // Store for later use
+  window._ticketData = { nickname, dateStr, sailingDays, cabin, selectedCamp, creature };
+
+  // Submit record to backend (fire-and-forget)
+  fetch('/api/tickets', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      nickname: nickname,
+      joinDate: dateStr,
+      sailingDays: sailingDays,
+      cabin: cabin,
+      camp: selectedCamp,
+      creature: creature
+    })
+  }).catch(function(e) { console.log('Backend unavailable:', e.message); });
+
+  goToScene('scene-ticket');
+  
+  // After 4s, auto-show invite button
+  setTimeout(() => {
+    document.querySelector('.flip-btn').textContent = '✓ 下一步';
+    document.querySelector('.flip-btn').onclick = function(e){
+      e.stopPropagation();
+      goToScene('scene-invite');
+    };
+  }, 4000);
+}
+
+/* ====== Card Flip ====== */
+function flipCard(e) {
+  if (e && e.target && e.target.closest('.flip-btn')) return;
+  const card = document.getElementById('ticket-card');
+  card.classList.toggle('flipped');
+}
+
+/* ====== Save / Share ====== */
+function saveTicket() {
+  // Create a temporary canvas to capture ticket
+  alert('💾 长按下方登舰证图片，选择「保存到相册」');
+  // Try to use html2canvas-like approach — navigate back to ticket for screenshot
+  goToScene('scene-ticket');
+  document.querySelector('.flip-btn').textContent = '📤 下一步';
+  document.querySelector('.flip-btn').onclick = function(e){
+    e.stopPropagation();
+    goToScene('scene-invite');
+  };
+}
+
+function shareTicket() {
+  if (navigator.share) {
+    navigator.share({
+      title: '前进号・周年限定登舰证',
+      text: '我已领取前进号周年限定登舰证，快来选择你的阵营，共赴山海！',
+      url: window.location.href
+    }).catch(() => {});
+  } else {
+    // Fallback: copy link
+    const text = `我已领取前进号周年限定登舰证 🚢\n快来选择你的阵营，共赴下一程山海！\n${window.location.href}`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('📋 已复制分享文案，快去发送给好友吧！');
+    }).catch(() => {
+      prompt('复制以下内容分享给好友：', text);
+    });
+  }
+}
+
+/* ====== Auto date ====== */
+document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('input-date').setAttribute('max', today);
+  document.getElementById('input-date').value = today;
+});
+
+/* ====== Nickname input validation ====== */
+document.addEventListener('DOMContentLoaded', () => {
+  const nickInput = document.getElementById('input-nickname');
+  nickInput.addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '').slice(0, 8);
+    if (this.value.length === 8) {
+      this.style.borderColor = 'rgba(76,175,80,.6)';
+    } else {
+      this.style.borderColor = '';
+    }
+  });
+});
+</script>
+</body>
+</html>
